@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QuizActivity">
+
+    <TabHost
+        android:id="@android:id/tabhost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <ScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TableLayout
+                            android:id="@+id/tabAnimals"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <ImageButton
+                                    android:id="@+id/imageBtnDog"
+                                    android:background="@drawable/dog"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/dog"/>
+                                <ImageButton
+                                    android:id="@+id/imageBtnCat"
+                                    android:background="@drawable/cat"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/cat"/>
+
+                                <ImageButton
+                                    android:id="@+id/imageBtnFrog"
+                                    android:background="@drawable/frog"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/frog"/>
+                                <ImageButton
+                                    android:id="@+id/imageBtnLion"
+                                    android:background="@drawable/lion"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/lion"/>
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <ImageButton
+                                    android:id="@+id/imageBtnTiger"
+                                    android:background="@drawable/tiger"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/tiger"/>
+                                <ImageButton
+                                    android:id="@+id/imageBtnHorse"
+                                    android:background="@drawable/horse"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/horse"/>
+
+                                <ImageButton
+                                    android:id="@+id/imageBtnCow"
+                                    android:background="@drawable/cow"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/cow"/>
+                                <ImageButton
+                                    android:id="@+id/imageBtnChicken"
+                                    android:background="@drawable/chicken"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/chicken"/>
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <ImageButton
+                                    android:id="@+id/imageBtnMonkey"
+                                    android:background="@drawable/monkey"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/monkey"/>
+                                <ImageButton
+                                    android:id="@+id/imageBtnPig"
+                                    android:background="@drawable/pig"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/pig"/>
+
+                                <ImageButton
+                                    android:id="@+id/imageBtnSheep"
+                                    android:background="@drawable/sheep"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/sheep"/>
+                                <ImageButton
+                                    android:id="@+id/imageBtnElephant"
+                                    android:background="@drawable/elephant"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/elephant"/>
+                            </TableRow>
+                        </TableLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TableLayout
+
+                            android:id="@+id/tabTransport"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <ImageButton
+                                    android:id="@+id/imageBtnAirplane"
+                                    android:background="@drawable/airplane"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/airplane"/>
+                                <ImageButton
+                                    android:id="@+id/imageBtnAmbulance"
+                                    android:background="@drawable/ambulance"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/ambulance"/>
+
+                                <ImageButton
+                                    android:id="@+id/imageBtnBicycle"
+                                    android:background="@drawable/bicycle"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/bicycle"/>
+                                <ImageButton
+                                    android:id="@+id/imageBtnBus"
+                                    android:background="@drawable/bus"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/bus"/>
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <ImageButton
+                                    android:id="@+id/imageBtnCar"
+                                    android:background="@drawable/car"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/car"/>
+                                <ImageButton
+                                    android:id="@+id/imageBtnFireEngine"
+                                    android:background="@drawable/fire_engine"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/fireEngine"/>
+
+                                <ImageButton
+                                    android:id="@+id/imageBtnHelicopter"
+                                    android:background="@drawable/helicopter"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/helicopter"/>
+                                <ImageButton
+                                    android:id="@+id/imageBtnMotorcycle"
+                                    android:background="@drawable/motorcycle"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/motorcycle"/>
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <ImageButton
+                                    android:id="@+id/imageBtnPoliceCar"
+                                    android:background="@drawable/police_car"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/policeCar"/>
+                                <ImageButton
+                                    android:id="@+id/imageBtnRocket"
+                                    android:background="@drawable/rocket"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/rocket"/>
+
+                                <ImageButton
+                                    android:id="@+id/imageBtnShip"
+                                    android:background="@drawable/ship"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/ship"/>
+                                <ImageButton
+                                    android:id="@+id/imageBtnTrain"
+                                    android:background="@drawable/train"
+                                    android:layout_weight="1"
+                                    android:contentDescription="@string/train"/>
+                            </TableRow>
+                        </TableLayout>
+                    </LinearLayout>
+
+
+                </FrameLayout>
+            </ScrollView>
+        </LinearLayout>
+    </TabHost>
+</android.support.constraint.ConstraintLayout>

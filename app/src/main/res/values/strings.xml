@@ -1,0 +1,41 @@
+<resources>
+
+    <string name="app_name">Sounds Of Nature</string>
+    <string name="cancel">Cancel</string>
+    <string name="elephant">Elephant</string>
+    <string name="tiger">tiger</string>
+    <string name="frog">frog</string>
+    <string name="chicken">chicken</string>
+    <string name="horse">horse</string>
+    <string name="cat">cat</string>
+    <string name="dog">dog</string>
+    <string name="sheep">sheep</string>
+    <string name="cow">cow</string>
+    <string name="lion">lion</string>
+    <string name="monkey">monkey</string>
+    <string name="pig">pig</string>
+    <string name="whose_sound_is_it">Whose sound is it?</string>
+    <string name="airplane">airplane</string>
+    <string name="bus">bus</string>
+    <string name="car">car</string>
+    <string name="bicycle">bicycle</string>
+    <string name="ambulance">ambulance</string>
+    <string name="fireEngine">fireEngine</string>
+    <string name="helicopter">helicopter</string>
+    <string name="ship">ship</string>
+    <string name="motorcycle">motorcycle</string>
+    <string name="policeCar">policeCar</string>
+    <string name="train">train</string>
+    <string name="rocket">rocket</string>
+
+    <string name="timonImage">timon</string>
+    <string name="listening">Listening</string>
+    <string name="quiz">Quiz</string>
+    <string name="chooseCategory">Choose category</string>
+    <string name="animals">Animals</string>
+    <string name="transport">Transport</string>
+    <string name="number_of_choices_description">Display 2 or 4 variants of answers</string>
+    <string name="number_of_choices">Number of Choices</string>
+    <string name="action_settings">settings</string>
+    <string name="welcome">Welcome</string>
+</resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Звуки природи</string>
+    <string name="welcome">Привіт</string>
+    <string name="cancel">Відміна</string>
+    <string name="elephant">Слон</string>
+    <string name="tiger">Тигр</string>
+    <string name="frog">Жаба</string>
+    <string name="chicken">Курка</string>
+    <string name="horse">Кінь</string>
+    <string name="cat">Кіт</string>
+    <string name="dog">Пес</string>
+    <string name="sheep">Вівця</string>
+    <string name="cow">Корова</string>
+    <string name="lion">Лев</string>
+    <string name="monkey">Мавпа</string>
+    <string name="pig">Свиня</string>
+    <string name="whose_sound_is_it">Чий це звук?</string>
+    <string name="airplane">Літак</string>
+    <string name="bus">Автобус</string>
+    <string name="car">Автомобіль</string>
+    <string name="bicycle">Велосипед</string>
+    <string name="ambulance">Швидка</string>
+    <string name="fireEngine">Пожежна</string>
+    <string name="helicopter">Вертоліт</string>
+    <string name="ship">Корабель</string>
+    <string name="motorcycle">Мотоцикл</string>
+    <string name="policeCar">Поліцейська</string>
+    <string name="train">Поїзд</string>
+    <string name="rocket">Ракета</string>
+    <string name="timonImage">Тимон</string>
+    <string name="listening">Прослуховування</string>
+    <string name="quiz">Вікторина</string>
+    <string name="chooseCategory">Виберіть категорію</string>
+    <string name="animals">Тварини</string>
+    <string name="transport">Транспорт</string>
+    <string name="number_of_choices_description">Відображає 2 або 4 варіанта відповіді</string>
+    <string name="number_of_choices">Кількість варіантів</string>
+    <string name="action_settings">Налаштування</string>
+    <string name="title_activity_settings">Налаштування</string>
+</resources>
