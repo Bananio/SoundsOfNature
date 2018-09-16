@@ -40,4 +40,7 @@
     <string name="congratulations">Поздравления</string>
     <string name="correct_answer">Ваш ответ правильный</string>
     <string name="ok">OK</string>
+    <string name="total_correct_answer">Всего правильных: %1$d</string>
+    <string name="current_question">Вопрос %1$d из %2$d</string>
+    <string name="best_result">Лучший результат: %1$d</string>
 </resources>
