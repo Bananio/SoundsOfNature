@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class DialogFragmentCategory extends DialogFragment implements View.OnClickListener {
 
     private Intent intent;
-
+    private TextView bestResultTextView;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         getDialog().setTitle(R.string.quiz);
@@ -19,6 +22,8 @@ public class DialogFragmentCategory extends DialogFragment implements View.OnCli
         v.findViewById(R.id.btnTransport).setOnClickListener(this);
         return v;
     }
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){

@@ -4,6 +4,7 @@ package com.example.banancheg.soundsofnature;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.TimeUtils;
 import android.view.Gravity;
 import android.view.Menu;
@@ -38,7 +40,7 @@ public class QuizActivity extends AppCompatActivity {
     private SecureRandom random;
     private QuizDialogFragmentCorrectAnswer quizDialogFragmentCorrectAnswer;
     private Animation shakeAnimation;
-    private TextView textView;
+    private TextView textView,correctAnswerTextView,currentQuestionTextView;
     private  ArrayList<ImageButton> referencesCurrentImageButtons;
     private LinearLayout row1, row2, parentRow1;
     private  ArrayList<Integer> workList,animalList,transportList, allCurrentImages;
@@ -48,14 +50,14 @@ public class QuizActivity extends AppCompatActivity {
     private int correctAnswerImage, correctAnswerSound;
     private SharedPreferences sharedPreferences;
     private ImageButton imageButton1, imageButton2, imageButton3, imageButton4;
-
+    private int correctAnswers, currentQuestion;
+    private final int totalQuestions=20;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
         createSoundpool();
-
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         choices = sharedPreferences.getString(CHOICES,"4");
 
@@ -66,6 +68,10 @@ public class QuizActivity extends AppCompatActivity {
 
         shakeAnimation = AnimationUtils.loadAnimation(this,R.anim.incorrect_shake);
         shakeAnimation.setRepeatCount(3);
+
+        correctAnswerTextView = (TextView) findViewById(R.id.correctAnswerTextView);
+        currentQuestionTextView = (TextView) findViewById(R.id.currentQuestionTextView);
+
 
         quizDialogFragmentCorrectAnswer = new QuizDialogFragmentCorrectAnswer();
 
@@ -149,16 +155,7 @@ public class QuizActivity extends AppCompatActivity {
             referencesCurrentImageButtons.add(imageButton2);
             if (row2 != null)
             row2.setVisibility(View.GONE);
-            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
-                parentRow1.setGravity(Gravity.CENTER);
-                row1.removeView(textView);
-                TextView newTextView = new TextView(this);
-                newTextView.setText(getResources().getString(R.string.whose_sound_is_it));
-                newTextView.setTextSize(35);
-                parentRow1.addView(newTextView);
 
-
-            }
         }else{
             referencesCurrentImageButtons = new ArrayList<>();
             imageButton1 = (ImageButton) findViewById(R.id.imageButton1);
@@ -206,6 +203,8 @@ public class QuizActivity extends AppCompatActivity {
                     break;
             }
             if (correctAnswerImage == currentImage){
+                correctAnswers++;
+
                 quizDialogFragmentCorrectAnswer.show(getFragmentManager(),"quizDialog");
 
                 startNewQuestion();
@@ -273,33 +272,47 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     void startNewQuestion(){
-        currentQuestionImagesIds.clear();
-        while (currentQuestionImagesIds.size()< Integer.parseInt(choices)){
-            currentQuestionImagesIds.add( workList.get(random.nextInt(workList.size())));
+        currentQuestion++;
+        if (currentQuestion<=20) {
+            currentQuestionTextView.setText(String.format(getResources().getString(R.string.current_question), currentQuestion, totalQuestions));
+            correctAnswerTextView.setText(String.format(getResources().getString(R.string.total_correct_answer), correctAnswers));
+            currentQuestionImagesIds.clear();
+            while (currentQuestionImagesIds.size() < Integer.parseInt(choices)) {
+                currentQuestionImagesIds.add(workList.get(random.nextInt(workList.size())));
+            }
+
+
+            allCurrentImages = new ArrayList<>();
+
+            Iterator<Integer> iterator = currentQuestionImagesIds.iterator();
+            Iterator<ImageButton> iterator2 = referencesCurrentImageButtons.iterator();
+            while (iterator.hasNext()) {
+                ImageButton imageButton = iterator2.next();
+                int currentImage = iterator.next();
+                imageButton.setOnClickListener(quizButtonListener);
+                allCurrentImages.add(currentImage);
+                imageButton.setBackgroundResource(currentImage);
+            }
+
+            iterator = currentQuestionImagesIds.iterator();
+            for (int i = 0; i <= random.nextInt(currentQuestionImagesIds.size()); i++) {
+                correctAnswerImage = iterator.next();
+            }
+
+            correctAnswerSound = hashMapWork.get(correctAnswerImage);
+
+            soundPool.load(this, correctAnswerSound, 1);
+        }else{
+            Intent intent= new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
-
-
-
-        allCurrentImages = new ArrayList<>();
-
-        Iterator<Integer> iterator = currentQuestionImagesIds.iterator();
-        Iterator<ImageButton> iterator2 = referencesCurrentImageButtons.iterator();
-        while (iterator.hasNext()){
-            ImageButton imageButton =iterator2.next();
-            int currentImage = iterator.next();
-            imageButton.setOnClickListener(quizButtonListener);
-            allCurrentImages.add(currentImage);
-            imageButton.setBackgroundResource(currentImage);
-        }
-
-        iterator = currentQuestionImagesIds.iterator();
-        for (int i = 0; i <=random.nextInt(currentQuestionImagesIds.size()); i++){
-            correctAnswerImage = iterator.next();
-        }
-
-        correctAnswerSound = hashMapWork.get(correctAnswerImage);
-
-        soundPool.load(this, correctAnswerSound, 1);
     }
-
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.d("myLogs", "onSaveInstanceState");
+    }
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.d("myLogs", "onRestoreInstanceState");
+    }
 }

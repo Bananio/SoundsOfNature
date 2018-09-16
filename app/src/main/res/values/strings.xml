@@ -41,4 +41,7 @@
     <string name="congratulations">Congratulations</string>
     <string name="correct_answer">Your answer is correct</string>
     <string name="ok">OK</string>
+    <string name="total_correct_answer">Total correct answer is %1$d</string>
+    <string name="current_question">Question %1$d of %2$d</string>
+    <string name="best_result">Best result is %1$d</string>
 </resources>
