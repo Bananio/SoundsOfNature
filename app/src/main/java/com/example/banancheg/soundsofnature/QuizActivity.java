@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.util.TimeUtils;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,8 +23,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,41 +30,44 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 
+
 public class QuizActivity extends AppCompatActivity {
 
-    String choices;
-    public static final String CHOICES = "pref_numberOfChoices";
-    SecureRandom random;
-
+    private String choices;
+    private static final String CHOICES = "pref_numberOfChoices";
+    private SecureRandom random;
+    private QuizDialogFragmentCorrectAnswer quizDialogFragmentCorrectAnswer;
     private Animation shakeAnimation;
-    TextView textView;
-    ArrayList<ImageButton> referencesCurrentImageButtons;
-    LinearLayout row1, row2, parentRow2, parentRow1;
-    ArrayList<Integer> workList,animalList,transportList, allCurrentImages;
-    LinkedHashSet<Integer> currentQuestionImagesIds;
-    HashMap<Integer, Integer> hashMapWork,hashMapAnimals, hashMapTransport;
-    Button btnAnimals, btnTransport;
-    SoundPool soundPool;
-    int currentImage;
-    int val, correctAnswerImage, correctAnswerSound;
-    SharedPreferences sharedPreferences;
-    ImageButton imageButton1, imageButton2, imageButton3, imageButton4;
-    int randomPictureImgBtn,randomPictureImgBtn2,randomPictureImgBtn3,randomPictureImgBtn4;
+    private TextView textView;
+    private  ArrayList<ImageButton> referencesCurrentImageButtons;
+    private LinearLayout row1, row2, parentRow1;
+    private  ArrayList<Integer> workList,animalList,transportList, allCurrentImages;
+    private LinkedHashSet<Integer> currentQuestionImagesIds;
+    private HashMap<Integer, Integer> hashMapWork,hashMapAnimals, hashMapTransport;
+    private SoundPool soundPool;
+    private int correctAnswerImage, correctAnswerSound;
+    private SharedPreferences sharedPreferences;
+    private ImageButton imageButton1, imageButton2, imageButton3, imageButton4;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+
         createSoundpool();
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        choices = sharedPreferences.getString(CHOICES,"4");
+
         row1 = (LinearLayout) findViewById(R.id.row1);
         parentRow1 = (LinearLayout) findViewById(R.id.parentRow1);
         row2 = (LinearLayout) findViewById(R.id.row2);
-        parentRow2 = (LinearLayout) findViewById(R.id.parentRow2);
         textView = (TextView) findViewById(R.id.textTitle);
+
         shakeAnimation = AnimationUtils.loadAnimation(this,R.anim.incorrect_shake);
         shakeAnimation.setRepeatCount(3);
 
+        quizDialogFragmentCorrectAnswer = new QuizDialogFragmentCorrectAnswer();
 
         animalList = new ArrayList<Integer>();
         animalList.add(R.drawable.cat);
@@ -138,18 +139,14 @@ public class QuizActivity extends AppCompatActivity {
             workList = transportList;
             hashMapWork = hashMapTransport;
         }
-        //row2.setVisibility(View.VISIBLE);
 
-        choices = sharedPreferences.getString(CHOICES,"2");
-        Log.d("myLogs", choices);
+
         if (choices.equals("2")){
-           // row2.setVisibility(View.GONE);
             referencesCurrentImageButtons = new ArrayList<>();
             imageButton1 = (ImageButton) findViewById(R.id.imageButton1);
             imageButton2 = (ImageButton) findViewById(R.id.imageButton2);
             referencesCurrentImageButtons.add(imageButton1);
             referencesCurrentImageButtons.add(imageButton2);
-           // row2.setVisibility(View.GONE);
             if (row2 != null)
             row2.setVisibility(View.GONE);
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
@@ -166,7 +163,6 @@ public class QuizActivity extends AppCompatActivity {
             referencesCurrentImageButtons = new ArrayList<>();
             imageButton1 = (ImageButton) findViewById(R.id.imageButton1);
             imageButton2 = (ImageButton) findViewById(R.id.imageButton2);
-          // row2.setVisibility(View.VISIBLE);
             if (row2 != null)
                 row2.setVisibility(View.VISIBLE);
             imageButton3 = (ImageButton) findViewById(R.id.imageButton3);
@@ -178,45 +174,12 @@ public class QuizActivity extends AppCompatActivity {
             referencesCurrentImageButtons.add(imageButton4);
 
         }
-        if (referencesCurrentImageButtons.size()<4){
-           // row2.setVisibility(View.GONE);
-        }
+
 
         currentQuestionImagesIds = new LinkedHashSet<>();
         random = new SecureRandom();
-        while (currentQuestionImagesIds.size()< Integer.parseInt(choices)){
-            currentQuestionImagesIds.add( workList.get(random.nextInt(workList.size())));
-        }
 
-        /*Iterator<Integer> iterator = currentQuestionImagesIds.iterator();
-        while(iterator.hasNext()) {
-            for (int i = 0; i < referencesCurrentImageButtons.size(); i++) {
-                referencesCurrentImageButtons.get(i).setBackgroundResource(iterator.next());
-            }
-        }*/
-
-        allCurrentImages = new ArrayList<>();
-
-        Iterator<Integer> iterator = currentQuestionImagesIds.iterator();
-        Iterator<ImageButton> iterator2 = referencesCurrentImageButtons.iterator();
-        while (iterator.hasNext()){
-            ImageButton imageButton =iterator2.next();
-            int currentImage = iterator.next();
-            imageButton.setOnClickListener(quizButtonListener);
-            allCurrentImages.add(currentImage);
-            imageButton.setBackgroundResource(currentImage);
-        }
-
-        iterator = null;
-
-        iterator = currentQuestionImagesIds.iterator();
-        for (int i = 0; i <=random.nextInt(currentQuestionImagesIds.size()); i++){
-            correctAnswerImage = iterator.next();
-        }
-
-        correctAnswerSound = hashMapWork.get(correctAnswerImage);
-
-        soundPool.load(this, correctAnswerSound, 1);
+        startNewQuestion();
 
 
     }
@@ -243,9 +206,15 @@ public class QuizActivity extends AppCompatActivity {
                     break;
             }
             if (correctAnswerImage == currentImage){
+                quizDialogFragmentCorrectAnswer.show(getFragmentManager(),"quizDialog");
 
+                startNewQuestion();
             }else{
                 currentButton.startAnimation(shakeAnimation);
+
+
+
+                startNewQuestion();
             }
 
         }
@@ -302,4 +271,35 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
     }
+
+    void startNewQuestion(){
+        currentQuestionImagesIds.clear();
+        while (currentQuestionImagesIds.size()< Integer.parseInt(choices)){
+            currentQuestionImagesIds.add( workList.get(random.nextInt(workList.size())));
+        }
+
+
+
+        allCurrentImages = new ArrayList<>();
+
+        Iterator<Integer> iterator = currentQuestionImagesIds.iterator();
+        Iterator<ImageButton> iterator2 = referencesCurrentImageButtons.iterator();
+        while (iterator.hasNext()){
+            ImageButton imageButton =iterator2.next();
+            int currentImage = iterator.next();
+            imageButton.setOnClickListener(quizButtonListener);
+            allCurrentImages.add(currentImage);
+            imageButton.setBackgroundResource(currentImage);
+        }
+
+        iterator = currentQuestionImagesIds.iterator();
+        for (int i = 0; i <=random.nextInt(currentQuestionImagesIds.size()); i++){
+            correctAnswerImage = iterator.next();
+        }
+
+        correctAnswerSound = hashMapWork.get(correctAnswerImage);
+
+        soundPool.load(this, correctAnswerSound, 1);
+    }
+
 }

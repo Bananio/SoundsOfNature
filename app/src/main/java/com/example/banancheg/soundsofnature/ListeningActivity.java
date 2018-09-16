@@ -7,12 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TabHost;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.media.SoundPool;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -21,7 +18,6 @@ import java.util.Map;
 
 public class ListeningActivity extends AppCompatActivity implements View.OnClickListener {
 
-    int sAirplane;
     private SoundPool soundPool;
     private Map<Integer, Integer> hashMapIdSounds;
     private ImageButton catImageBtn, tigerImageBtn, chickenImageBtn, cowImageBtn, dogImageBtn, elephantImageBtn, frogImageBtn, horseImageBtn, lionImageBtn, pigImageBtn, monkeyImageBtn, sheepImageBtn, airplaneImageBtn, ambulanceImageBtn, bicycleImageBtn, busImageBtn, carImageBtn, fireEngineImageBtn, helicopterImageBtn, motorcycleImageBtn, policeCarImageBtn, rocketImageBtn, shipImageBtn, trainImageBtn;
@@ -30,7 +26,6 @@ public class ListeningActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_listening);
 
 
@@ -135,9 +130,6 @@ public class ListeningActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
-        //soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC,0);
-         //sAirplane = soundPool.load(this,R.raw.airplane,1);
-       // soundPool.play(sAirplane,1,1,1,0,1);
     }
 
     @Override
@@ -155,7 +147,6 @@ public class ListeningActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("Ravi","Main Pause");
         soundPool.release();
         soundPool = null;
     }

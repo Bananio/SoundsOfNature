@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 public class DialogFragmentCategory extends DialogFragment implements View.OnClickListener {
 
-    Intent intent;
+    private Intent intent;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

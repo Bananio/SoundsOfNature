@@ -38,4 +38,7 @@
     <string name="number_of_choices">Number of Choices</string>
     <string name="action_settings">settings</string>
     <string name="welcome">Welcome</string>
+    <string name="congratulations">Congratulations</string>
+    <string name="correct_answer">Your answer is correct</string>
+    <string name="ok">OK</string>
 </resources>

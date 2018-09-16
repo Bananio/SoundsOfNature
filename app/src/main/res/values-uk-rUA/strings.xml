@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Звуки природи</string>
     <string name="welcome">Привіт</string>
     <string name="cancel">Відміна</string>
     <string name="elephant">Слон</string>
@@ -38,4 +37,7 @@
     <string name="number_of_choices">Кількість варіантів</string>
     <string name="action_settings">Налаштування</string>
     <string name="title_activity_settings">Налаштування</string>
+    <string name="congratulations">Поздоровлення</string>
+    <string name="correct_answer">Ваша відповідь вірна</string>
+    <string name="ok">OK</string>
 </resources>
